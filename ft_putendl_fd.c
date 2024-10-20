@@ -6,7 +6,7 @@
 /*   By: usogukpi <usogukpi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:46:49 by usogukpi          #+#    #+#             */
-/*   Updated: 2024/10/19 13:31:16 by usogukpi         ###   ########.fr       */
+/*   Updated: 2024/10/20 14:22:59 by usogukpi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_putendl_fd(char *s, int fd)
 {
 	int	len;
 
+	if (!s)
+		return ;
 	if (s)
 	{
 		len = ft_strlen(s);
