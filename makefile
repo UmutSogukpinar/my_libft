@@ -50,14 +50,17 @@ BONUS = ft_lstadd_front.c \
 OBJECTS = $(FILES:.c=.o)
 BONUS_OBJ = $(BONUS:.c=.o)
 
-all: ${OBJECTS}
-	${AR} rcs ${NAME} ${OBJECTS}
+all: ${NAME}
+
+$(NAME): $(OBJECTS)
+	ar rcs $(NAME) $(OBJECTS)
+
 bonus: $(OBJ) $(BONUS_OBJ)
 
 	ar rcs $(NAME) $(OBJ) $(BONUS_OBJ)
 
 clean:
-	${RM} ${OBJECTS}
+	${RM} ${OBJECTS} ${BONUS_OBJ}
 
 fclean: clean
 	${RM} ${NAME}
