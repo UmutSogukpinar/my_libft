@@ -6,7 +6,7 @@
 /*   By: usogukpi <usogukpi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 10:51:43 by usogukpi          #+#    #+#             */
-/*   Updated: 2024/10/19 16:30:27 by usogukpi         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:30:21 by usogukpi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 
 	if (!lst || !f || !del)
 		return (NULL);
-	head = (t_list *)malloc(sizeof(t_list));
-	if (!head)
-		return (NULL);
+	head = NULL;
 	while (lst)
 	{
 		new_node = ft_lstnew(f(lst -> content));
