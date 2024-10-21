@@ -1,6 +1,7 @@
 NAME = libft.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
+AR = ar rcs
 RM = rm -f
 FILES =	ft_atoi.c \
 		ft_memchr.c \
@@ -53,11 +54,11 @@ BONUS_OBJ = $(BONUS:.c=.o)
 all: ${NAME}
 
 $(NAME): $(OBJECTS)
-	ar rcs $(NAME) $(OBJECTS)
+	$(AR) $(NAME) $(OBJECTS)
 
-bonus: $(OBJ) $(BONUS_OBJ)
+bonus: $(OBJECTS) $(BONUS_OBJ)
 
-	ar rcs $(NAME) $(OBJ) $(BONUS_OBJ)
+	$(AR) $(NAME) $(OBJECTS) $(BONUS_OBJ)
 
 clean:
 	${RM} ${OBJECTS} ${BONUS_OBJ}

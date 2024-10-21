@@ -6,16 +6,11 @@
 /*   By: usogukpi <usogukpi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:48:22 by usogukpi          #+#    #+#             */
-/*   Updated: 2024/10/20 15:31:23 by usogukpi         ###   ########.fr       */
+/*   Updated: 2024/10/20 18:36:37 by usogukpi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-int static	ft_is_sep(char c, char sep)
-{
-	return (c == sep);
-}
 
 int static	ft_count_strings(char *str, char c)
 {
@@ -26,65 +21,80 @@ int static	ft_count_strings(char *str, char c)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		while (str[i] != '\0' && ft_is_sep(str[i], c))
+		while (str[i] != '\0' && (str[i] == c))
 			i++;
 		if (str[i] != '\0')
 			count++;
-		while (str[i] != '\0' && !ft_is_sep(str[i], c))
+		while (str[i] != '\0' && !(str[i] == c))
 			i++;
 	}
 	return (count);
 }
 
+void	*ft_free_word(char **strings, int string_amount)
+{
+	int	i;
+
+	i = 0;
+	while (i < string_amount)
+	{
+		free(strings[i]);
+		i++;
+	}
+	free(strings);
+	return (NULL);
+}
+
 char static	*ft_get_word(char *str, char sep, int i)
 {
-	char	*arr;
-	int		original_i;
-	int		j;
+	char	*word;
+	int		start_index;
+	int		word_index;
 	int		len;
 
-	original_i = i;
-	j = 0;
-	while (!ft_is_sep(str[i], sep) && str[i] != '\0')
+	start_index = i;
+	word_index = 0;
+	while (!(str[i] == sep) && str[i] != '\0')
 		i++;
-	len = i - original_i;
-	arr = malloc(len + 1);
-	if (!arr)
+	len = i - start_index;
+	word = malloc(len + 1);
+	if (!word)
 		return (NULL);
-	while (j < len)
+	while (word_index < len)
 	{
-		arr[j] = str[original_i];
-		original_i++;
-		j++;
+		word[word_index] = str[start_index];
+		start_index++;
+		word_index++;
 	}
-	arr[j] = '\0';
-	return (arr);
+	word[word_index] = '\0';
+	return (word);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**strings;
 	int		i;
-	int		count;
+	int		strings_index;
 
-	i = 0;
-	count = ft_count_strings((char *) s, c);
-	strings = malloc(sizeof(char *) * (count + 1));
+	strings_index = ft_count_strings((char *) s, c);
+	strings = malloc(sizeof(char *) * (strings_index + 1));
 	if (!strings)
 		return (NULL);
-	count = 0;
+	i = 0;
+	strings_index = 0;
 	while (s[i] != '\0')
 	{
-		while (s[i] != '\0' && ft_is_sep(s[i], c))
+		while (s[i] != '\0' && s[i] == c)
 			i++;
-		if (s[i] != '\0' && !ft_is_sep(s[i], c))
+		if (s[i] != '\0' && !(s[i] == c))
 		{
-			strings[count] = ft_get_word((char *) s, c, i);
-			count++;
+			strings[strings_index++] = ft_get_word((char *) s, c, i);
+			if (!strings[strings_index - 1])
+				return (ft_free_word(strings, strings_index - 1));
 		}
-		while (s[i] != '\0' && !ft_is_sep(s[i], c))
+		while (s[i] != '\0' && !(s[i] == c))
 			i++;
 	}
-	strings[count] = NULL;
+	strings[strings_index] = NULL;
 	return (strings);
 }

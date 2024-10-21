@@ -6,7 +6,7 @@
 /*   By: usogukpi <usogukpi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:05:37 by usogukpi          #+#    #+#             */
-/*   Updated: 2024/10/12 17:16:52 by usogukpi         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:26:24 by usogukpi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	i = 0;
 	if (dstsize == 0)
 	{
-		while (src[i] != '\0')
-			i++;
-		return (i);
+		return (ft_strlen(src));
 	}
 	while (src[i] != '\0' && i < dstsize - 1)
 	{
