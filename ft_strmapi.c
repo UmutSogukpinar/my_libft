@@ -12,6 +12,17 @@
 
 #include "libft.h"
 
+char toUpper(unsigned int i, char c)
+{
+	if (c >= 97 && c <= 122)
+	{
+		c -= 32;
+		return (c);
+	}
+	else
+		return (c);
+}
+
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char	*arr;
