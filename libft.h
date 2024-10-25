@@ -62,7 +62,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len);
 
 char	*ft_itoa(int n);
 int		ft_atoi(const char *str);
-int		ft_put_number(long long num, char *base);
+long long		ft_put_number(long long num, char *base);
 
 /* ======================== FILEDESCRIPTOR FUNCTIONS ========================*/
 
